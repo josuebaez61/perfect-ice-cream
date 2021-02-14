@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { Time } from '../classes/Time';
 
 const htmlTimer = $('#timer');

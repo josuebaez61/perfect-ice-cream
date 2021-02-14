@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
     mode: 'development',
@@ -70,5 +71,9 @@ module.exports = {
             }]
         }),
         new MinifyPlugin(),
+        new webpack.ProvidePlugin({
+            $: "jquery", 
+            jQuery: "jquery"
+      })
     ]
 }

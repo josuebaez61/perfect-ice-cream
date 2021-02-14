@@ -1,3 +1,4 @@
+import 'bootstrap';
 import { printProducts } from './js/dom';
 import { setEvents } from './js/events';
 import { setSplide } from './js/splide';
