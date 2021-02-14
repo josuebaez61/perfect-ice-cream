@@ -1,0 +1,35 @@
+.logo {
+  .logo__title {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    flex-wrap: wrap;
+    color: white;
+    font-family: "Welcome Summer";
+    font-size: 4rem;
+    text-shadow: 1px 1px 1px black;
+    small {
+      font-family: "KR Popsicle";
+      font-size: 2rem;
+      align-self: flex-end;
+      color: $lightblue;
+      @include bootstrapmedia(md) {
+        font-size: 3rem;
+      }
+    }
+    @include bootstrapmedia(md) {
+      font-size: 7rem;
+      width: 926px;
+    }
+  }
+}
+
+.logo--navbar {
+  .logo__title {
+    small {
+      font-size: 0.64rem;
+    }
+    font-size: 1.5rem;
+    width: 208px;
+  }
+}
