@@ -12,6 +12,7 @@ export const printProducts = async (splide) => {
         template.querySelector('.card-text').textContent = product.desc;
         template.querySelector('.card-discount').textContent = '$ ' + (product.price / product.discount_percent ).toFixed(2);
         template.querySelector('.card-price').textContent = '$ ' + product.price.toFixed(2);
+        template.querySelector('button').dataset.id = product.id;
         const clone = template.cloneNode(true);
         fragment.appendChild(clone);
     }

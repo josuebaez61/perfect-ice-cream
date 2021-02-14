@@ -1,61 +1,70 @@
 [
-    {
+    {   
+        "id": 1,
         "name": "1/2 Kg. de Helado",
         "desc": "3 sabores a elección",
         "discount_percent": 1.10,
         "price": 300.00,
         "img": "assets/images/prod1.jpg"
     },
-    {
+    {   
+        "id": 2,
         "name": "1/4 Kg. de Helado",
         "desc": "2 sabores a elección",
         "discount_percent": 1.10,
         "price": 180.00,
         "img": "assets/images/prod1.jpg"
     },
-    {
+    {   
+        "id": 3,
         "name": "1 Kg. de Helado",
         "desc": "4 sabores a elección",
         "discount_percent": 1.10,
         "price": 500.00,
         "img": "assets/images/prod2.jpg"
     },
-    {
+    {   
+        "id": 4,
         "name": "Cono",
         "desc": "2 sabores a elección",
         "discount_percent": 1.10,
         "price": 150.00,
         "img": "assets/images/cone.jpg"
     },
-    {
+    {   
+        "id": 5,
         "name": "Postrecito de chocolate",
         "desc": "Crema y chocolate",
         "discount_percent": 1.10,
         "price": 200.00,
         "img": "assets/images/cream-chocolate.jpg"
     },
-    {
+    {   
+        "id": 6,
         "name": "Postre healado con frutos y semillas",
         "desc": "Crema y chocolate",
         "discount_percent": 1.10,
         "price": 200.00,
         "img": "assets/images/icecream-4.jpg"
     },
-    {
+    {   
+        "id": 7,
         "name": "Postre helado de vainilla con sprinkles",
         "desc": "Sabor vainilla",
         "discount_percent": 1.10,
         "price": 250.00,
         "img": "assets/images/vanilla-sprinkles.jpg"
     },
-    {
+    {   
+        "id": 8,
         "name": "Torta helada",
         "desc": "Porción de torta helada",
         "discount_percent": 1.10,
         "price": 200.00,
         "img": "assets/images/cake.jpg"
     },
-    {
+    {   
+        "id": 9,
         "name": "Paleta helada",
         "desc": "Paleta helada con frutos del bosque",
         "discount_percent": 1.10,
