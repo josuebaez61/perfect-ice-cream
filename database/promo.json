@@ -5,7 +5,9 @@
         "desc": "3 sabores a elección",
         "discount_percent": 1.10,
         "price": 300.00,
-        "img": "assets/images/prod1.jpg"
+        "img": "assets/images/prod1.jpg",
+        "flavors": true,
+        "max_flavors": 3
     },
     {   
         "id": 2,
@@ -13,7 +15,9 @@
         "desc": "2 sabores a elección",
         "discount_percent": 1.10,
         "price": 180.00,
-        "img": "assets/images/prod1.jpg"
+        "img": "assets/images/prod1.jpg",
+        "flavors": true,
+        "max_flavors": 2
     },
     {   
         "id": 3,
@@ -21,7 +25,9 @@
         "desc": "4 sabores a elección",
         "discount_percent": 1.10,
         "price": 500.00,
-        "img": "assets/images/prod2.jpg"
+        "img": "assets/images/prod2.jpg",
+        "flavors": true,
+        "max_flavors": 4
     },
     {   
         "id": 4,
@@ -29,7 +35,9 @@
         "desc": "2 sabores a elección",
         "discount_percent": 1.10,
         "price": 150.00,
-        "img": "assets/images/cone.jpg"
+        "img": "assets/images/cone.jpg",
+        "flavors": true,
+        "max_flavors": 2
     },
     {   
         "id": 5,
@@ -37,7 +45,9 @@
         "desc": "Crema y chocolate",
         "discount_percent": 1.10,
         "price": 200.00,
-        "img": "assets/images/cream-chocolate.jpg"
+        "img": "assets/images/cream-chocolate.jpg",
+        "flavors": false,
+        "max_flavors": null
     },
     {   
         "id": 6,
@@ -45,7 +55,9 @@
         "desc": "Crema y chocolate",
         "discount_percent": 1.10,
         "price": 200.00,
-        "img": "assets/images/icecream-4.jpg"
+        "img": "assets/images/icecream-4.jpg",
+        "flavors": false,
+        "max_flavors": null
     },
     {   
         "id": 7,
@@ -53,7 +65,9 @@
         "desc": "Sabor vainilla",
         "discount_percent": 1.10,
         "price": 250.00,
-        "img": "assets/images/vanilla-sprinkles.jpg"
+        "img": "assets/images/vanilla-sprinkles.jpg",
+        "flavors": false,
+        "max_flavors": null
     },
     {   
         "id": 8,
@@ -61,7 +75,9 @@
         "desc": "Porción de torta helada",
         "discount_percent": 1.10,
         "price": 200.00,
-        "img": "assets/images/cake.jpg"
+        "img": "assets/images/cake.jpg",
+        "flavors": false,
+        "max_flavors": null
     },
     {   
         "id": 9,
@@ -69,6 +85,8 @@
         "desc": "Paleta helada con frutos del bosque",
         "discount_percent": 1.10,
         "price": 100.00,
-        "img": "assets/images/icecream-5.jpg"
+        "img": "assets/images/icecream-5.jpg",
+        "flavors": false,
+        "max_flavors": null
     }
 ]

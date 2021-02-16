@@ -16,8 +16,15 @@
       @include bootstrapmedia(md) {
         font-size: 3rem;
       }
+      @include bootstrapmedia(lg) {
+        font-size: 3rem;
+      }
     }
     @include bootstrapmedia(md) {
+      font-size: 7rem;
+      width: 600px;
+    }
+    @include bootstrapmedia(lg) {
       font-size: 7rem;
       width: 926px;
     }

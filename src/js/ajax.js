@@ -22,3 +22,14 @@ export const getProductById = (id) => {
         });
     });
 }
+
+export const getFlavors = () => {
+    return new Promise((resolve,reject) => {
+        $.ajax({
+            type: 'GET',
+            url: '../database/flavors.json',
+            success: resolve,
+            reject: reject
+        });
+    });
+}

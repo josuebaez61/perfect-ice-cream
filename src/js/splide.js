@@ -10,6 +10,7 @@ export const setSplide = () => {
             gap: 10,
             fixedHeight: '520px',
             pagination: false,
+            drag: false,
             breakpoints: {
                 1670: {
                     perPage: 4,

@@ -1,15 +1,12 @@
 // @import './scss/utilities/mixins';
 
 .home__header {
-  height: calc(100vh - 56px); // 56px is navbar's height
+  height: calc(100vh); // 56px is navbar's height
   width: 100%;
 }
 
 .home__logo-column {
-  margin-top: 10px;
-  @include bootstrapmedia(sm) {
-    margin-top: 30px;
-  }
+  margin-top: 68px;
 }
 
 .home__header-background {
@@ -21,4 +18,8 @@
 
 #pageContent h2 {
   font-family: Magicpie;
+}
+
+main {
+  margin-bottom: 70px;
 }
