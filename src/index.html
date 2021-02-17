@@ -58,8 +58,10 @@
         </li>
       </ul>
     </div>
-    <button type="button" class="btn btn-outline-light d-none d-lg-block" data-toggle="modal" data-target="#cartModal">
-      <i class="fas fa-shopping-cart"></i> <span class="badge badge-primary">0</span>
+    <button id="btnCart" type="button" class="btn btn-outline-light d-none d-lg-inline" data-toggle="modal"
+      data-target="#cartModal">
+      Carrito de productos <i class="fas fa-shopping-cart"></i> <span id="cartProductQuantity"
+        class="badge badge-primary">0</span>
     </button>
   </nav>
   <!-- ============================================= -->
@@ -96,113 +98,9 @@
         </div>
       </div>
     </section>
-    <!-- ============================================= -->
-    <!-- SECTION Modal ADD CART -->
-    <!-- ============================================= -->
-    <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="addCartModalLabel">Agregar al carrito</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-4">
-                <img class="w-100" src="#" alt="...">
-              </div>
-              <div class="col-8">
-                <h3>Titulo</h3>
-                <p>Descripción</p>
-                <form id="cartForm">
-                  <div class="flavor-box d-none">
-                    <div id="flavorList" class="list-group list-group-flush">
-                    </div>
-                  </div>
-                  <div class="input-group mt-2">
-                    <div class="input-group-prepend">
-                      <button class="btn btn-outline-info quantity-button" type="button" data-action="substract" reandonly id="button-substract">
-                        <i class="fas fa-minus"></i>
-                      </button>
-                    </div>
-                    <input autocomplete="off" type="number" class="form-control text-center font-goodtimes"
-                      name="quantity"
-                      id="quantityInput"
-                      value="1"
-                      aria-label="Example text with button addon"
-                      aria-describedby="button-addon1"
-                      min="0",
-                      max="20"
-                    >
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-info quantity-button" type="button" data-action="add" reandonly id="button-add">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-            <button type="submit" form="cartForm" class="btn btn-primary">Confirmar</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- ============================================= -->
-    <!-- !SECTION Modal ADD CART -->
-    <!-- ============================================= -->
-    <!-- ============================================= -->
-    <!-- SECTION Modal CART -->
-    <!-- ============================================= -->
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="cartModalLabel">Carro de productos</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <table id="listItems" class="table table-sm">
-              <thead class="thead-light">
-                <tr>
-                  <th>#</th>
-                  <th>Item</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Total</th>
-                </tr>
-                <tbody>
-                </tbody>
-                <tfoot>         
-                  <tr class="table-light">
-                    <th colspan="3"></td>
-                    <th>TOTAL</td>
-                    <th id="tdTotalPrice">FINAL</td>
-                  </tr>
-                </tfoot>
-              </thead>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Confirmar pedido</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- ============================================= -->
-    <!-- !SECTION Modal CART -->
-    <!-- ============================================= -->
   </main>
-  
+
   <!-- ============================================= -->
   <!-- ANCHOR Cart button responsive -->
   <!-- ============================================= -->
@@ -210,13 +108,126 @@
     <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#cartModal">
       <div class="row justify-content-between">
         <div class="col-1"><span id="mobileProductsQuantity" class="badge badge-secondary">0</span></div>
-        <div class="col-6">En carrito</div> 
+        <div class="col-6">En carrito</div>
         <div class="col-4" id="totalPrice">$ 0.00</div>
       </div>
     </button>
   </div>
+
   <!-- ============================================= -->
-  <!-- Cart button responsive -->
+  <!-- ANCHOR Toast -->
+  <!-- ============================================= -->
+
+  <div class="position-fixed top-0 right-0 p-3" style="z-index: 5; right: 0; top: 68px; font-family: Goodtimes;">
+    <div id="successToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
+      <div class="toast-body bg-info">
+        ¡Se agregó al carrito con éxito! <i class="fas fa-check"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================= -->
+  <!-- SECTION Modal ADD CART -->
+  <!-- ============================================= -->
+  <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCartModalLabel">Agregar al carrito</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-4">
+              <img class="w-100" src="#" alt="...">
+            </div>
+            <div class="col-8">
+              <h3>Titulo</h3>
+              <p>Descripción</p>
+              <form id="cartForm">
+                <div class="flavor-box d-none">
+                  <div id="flavorList" class="list-group list-group-flush">
+                  </div>
+                </div>
+                <div class="input-group mt-2">
+                  <div class="input-group-prepend">
+                    <button class="btn btn-outline-info quantity-button" type="button" data-action="substract" reandonly
+                      id="button-substract">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                  <input autocomplete="off" type="number" class="form-control text-center font-goodtimes"
+                    style="background-color: white;" readonly name="quantity" id="quantityInput" value="1"
+                    aria-label="quantity" aria-describedby="button-addon1" min="0" , max="20">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-info quantity-button" type="button" data-action="add" reandonly
+                      id="button-add">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="cartForm" class="btn btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================= -->
+  <!-- !SECTION Modal ADD CART -->
+  <!-- ============================================= -->
+  <!-- ============================================= -->
+  <!-- SECTION Modal CART -->
+  <!-- ============================================= -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cartModalLabel">Carrito de productos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table id="listItems" class="table table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            <tbody>
+            </tbody>
+            <tfoot>
+              <tr class="table-light">
+                <th colspan="3">
+                  </td>
+                <th>TOTAL</td>
+                <th id="tdTotalPrice">FINAL</td>
+              </tr>
+            </tfoot>
+            </thead>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+          <button id="btnConfirmOrder" type="button" class="btn btn-primary">Confirmar pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================= -->
+  <!-- !SECTION Modal CART -->
   <!-- ============================================= -->
 
   <!-- ============================================= -->
@@ -229,6 +240,11 @@
       <td>2</td>
       <td>181.82</td>
       <td>181.82</td>
+      <td>
+        <button type="button" class="btn btn-secondary btn-sm">
+          <i class="fas fa-times"></i>
+        </button>
+      </td>
     </tr>
   </template>
   <template id="flavorTemplate">
@@ -266,4 +282,5 @@
   <!-- !SECTION HTML Templates -->
   <!-- ============================================= -->
 </body>
+
 </html>

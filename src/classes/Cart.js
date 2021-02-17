@@ -7,10 +7,22 @@ export class Cart {
     addToCart( product ) {
         this.products.push( product );
         this.calcTotalPrice( product );
-        console.log(this.products)
+        return true;
     }
     
     calcTotalPrice({ product, quantity }) {
         this.total_price += (product.price / product.discount_percent) * quantity; 
+    }
+
+    removeProduct( cartId ) {
+        const { product, quantity } = this.products.find( x => x.cart_id == cartId );
+        this.total_price -= (product.price / product.discount_percent) * quantity; 
+        this.products = this.products.filter( x => x.cart_id != cartId );
+        return true;
+    }
+
+    resetCart() {
+        this.products = [];
+        this.total_price = 0;
     }
 }

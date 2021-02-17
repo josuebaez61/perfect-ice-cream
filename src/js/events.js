@@ -2,6 +2,7 @@ import { getProductById } from "./ajax";
 import { scrollTo } from 'jquery.scrollto';
 import { printFlavors } from "./dom";
 import { animateCSS } from "./animate";
+import Swal from "sweetalert2";
 
 const addCartModal = $('#addCartModal');
 const quantityInput = $('#quantityInput');
@@ -15,6 +16,9 @@ const mobileProductsQuantity = $('#mobileProductsQuantity') ;
 const mobileTotalPrice = $('#totalPrice');
 const cartButtonResponsive = $('#cartButtonResponsive');
 const tdTotalPrice = $('#tdTotalPrice');
+const cartProductQuantity = $('#cartProductQuantity');
+const btnCart = $('#btnCart');
+const btnConfirmOrder = $('#btnConfirmOrder');
 
 export const setEvents = (slider, cart) => {
     $('#btnDisplace').on('click', () => {
@@ -79,9 +83,9 @@ export const setEvents = (slider, cart) => {
     // SECTION Modal "Carrito"
     //===========================================================>>
     cartModal.on('show.bs.modal', (e) => {
-        console.log('CART ', cart)
         if ( cart.products.length > 0 ) {
             const tbody = cartModal.find('tbody');
+            tbody.html('');
             const template = document.querySelector('#trCartTemplate').content;
             const fragment = document.createDocumentFragment();
             let totalPrice = 0;
@@ -93,13 +97,24 @@ export const setEvents = (slider, cart) => {
                 tdArray[2].textContent = item.quantity;
                 tdArray[3].textContent = discount_price.toFixed(2);
                 tdArray[4].textContent = (discount_price * item.quantity).toFixed(2);
+                template.querySelector('.btn-secondary').dataset.cartId = item.cart_id;
                 totalPrice += discount_price * item.quantity;
                 const clone = template.cloneNode(true);
                 fragment.appendChild(clone);
             });
             tbody.prepend(fragment);
-            tdTotalPrice.text(totalPrice.toFixed(2));
-            tdTotalPrice.css('font-weight', 700);
+            tdTotalPrice.text('$ ' + totalPrice.toFixed(2));
+            const btnRemove = cartModal.find('#listItems .btn-secondary');
+            btnRemove.each((i, btn) => {
+                $(btn).on('click', e => {
+                    const cartId = $(btn).data('cart-id');
+                    if ( cart.removeProduct(cartId) ) {
+                        $(btn).parents('tr').remove();
+                        tdTotalPrice.text('$ ' + (cart.total_price * 1).toFixed(2));
+                        cartProductQuantity.text(cart.products.length);
+                    }
+                })
+            });
         }
     });
     //===========================================================>>
@@ -140,15 +155,19 @@ export const setEvents = (slider, cart) => {
         const item = {
             product: selectedProd,
             quantity,
-            flavors: checkeds
+            flavors: checkeds,
+            cart_id: new Date().getTime()
         }
-        cart.addToCart( item );
-        addCartModal.modal('hide');
-        console.log(cart.products.length)
-        mobileProductsQuantity.text(cart.products.length);
-        mobileTotalPrice.text('$ ' + cart.total_price.toFixed(2));
-        animateCSS('#mobileProductsQuantity', 'tada');
-        animateCSS('#totalPrice', 'pulse');
+        if (cart.addToCart( item )) { 
+            addCartModal.modal('hide');
+            mobileProductsQuantity.text(cart.products.length);
+            mobileTotalPrice.text('$ ' + cart.total_price.toFixed(2));
+            animateCSS('#mobileProductsQuantity', 'tada');
+            animateCSS('#totalPrice', 'pulse');
+            $('#successToast').toast('show');
+            cartProductQuantity.text(cart.products.length)
+            animateCSS('#btnCart', 'tada');
+        };
     });
     //===========================================================>>
     // !SECTION Eventos del formulario de agregar al carrito
@@ -177,4 +196,15 @@ export const setEvents = (slider, cart) => {
     //===========================================================>>
     // !SECTION Eventos de window
     //===========================================================>>
+    btnConfirmOrder.on('click', () => {
+        cartModal.modal('hide');
+        cart.resetCart();
+        cartProductQuantity.text(cart.products.length);
+        cartModal.find('tbody').html('');
+        tdTotalPrice.text('$ 0.00');
+        Swal.fire({
+            title: 'Pedido confirmado',
+            icon: 'success',
+        });
+    });
 }
