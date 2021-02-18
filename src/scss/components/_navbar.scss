@@ -6,7 +6,7 @@ nav {
   font-size: 1.2rem;
   font-weight: 800;
   position: fixed !important;
-  width: 100%;
+  width: 100vw;
   z-index: 1;
   transition: background-color 0.5s;
   @include bootstrapmedia(md) {

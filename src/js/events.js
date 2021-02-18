@@ -3,6 +3,7 @@ import { scrollTo } from 'jquery.scrollto';
 import { printFlavors } from "./dom";
 import { animateCSS } from "./animate";
 import Swal from "sweetalert2";
+import { Product } from "../classes/Product";
 
 const addCartModal = $('#addCartModal');
 const quantityInput = $('#quantityInput');
@@ -12,12 +13,8 @@ const flavorBox = $('.flavor-box');
 const cartForm = $('#cartForm');
 const nav = $('nav');
 const cartModal = $('#cartModal');
-const mobileProductsQuantity = $('#mobileProductsQuantity') ;
-const mobileTotalPrice = $('#totalPrice');
 const cartButtonResponsive = $('#cartButtonResponsive');
 const tdTotalPrice = $('#tdTotalPrice');
-const cartProductQuantity = $('#cartProductQuantity');
-const btnCart = $('#btnCart');
 const btnConfirmOrder = $('#btnConfirmOrder');
 
 export const setEvents = (slider, cart) => {
@@ -84,21 +81,22 @@ export const setEvents = (slider, cart) => {
     //===========================================================>>
     cartModal.on('show.bs.modal', (e) => {
         if ( cart.products.length > 0 ) {
+            btnConfirmOrder.attr('disabled', false);
             const tbody = cartModal.find('tbody');
             tbody.html('');
             const template = document.querySelector('#trCartTemplate').content;
             const fragment = document.createDocumentFragment();
             let totalPrice = 0;
-            cart.products.forEach((item, index) => {
+            cart.products.forEach((product, index) => {
                 const tdArray = template.querySelectorAll('td');
-                const discount_price = (item.product.price / item.product.discount_percent);
+                const discount_price = (product.price / product.discount_percent);
                 tdArray[0].textContent = index + 1;
-                tdArray[1].textContent = item.product.name;
-                tdArray[2].textContent = item.quantity;
+                tdArray[1].textContent = product.name;
+                tdArray[2].textContent = product.quantity;
                 tdArray[3].textContent = discount_price.toFixed(2);
-                tdArray[4].textContent = (discount_price * item.quantity).toFixed(2);
-                template.querySelector('.btn-secondary').dataset.cartId = item.cart_id;
-                totalPrice += discount_price * item.quantity;
+                tdArray[4].textContent = (discount_price * product.quantity).toFixed(2);
+                template.querySelector('.btn-secondary').dataset.cartId = product.cart_id;
+                totalPrice += discount_price * product.quantity;
                 const clone = template.cloneNode(true);
                 fragment.appendChild(clone);
             });
@@ -110,8 +108,6 @@ export const setEvents = (slider, cart) => {
                     const cartId = $(btn).data('cart-id');
                     if ( cart.removeProduct(cartId) ) {
                         $(btn).parents('tr').remove();
-                        tdTotalPrice.text('$ ' + (cart.total_price * 1).toFixed(2));
-                        cartProductQuantity.text(cart.products.length);
                     }
                 })
             });
@@ -146,27 +142,16 @@ export const setEvents = (slider, cart) => {
         const btn  = e.originalEvent.submitter;
         const quantity = parseInt(e.target.quantity.value);
         let checkeds = [];
-        let flavors  = [];
+        let flavorsArray  = [];
         if ( e.target.flavors ) {
-            flavors = Object.values(e.target.flavors);
-            checkeds = (flavors.map( flavor => $(flavor).is(':checked') ? flavor.value : null )).filter( x => x != null);
+            flavorsArray = Object.values(e.target.flavors);
+            checkeds = (flavorsArray.map( flavor => $(flavor).is(':checked') ? flavorsArray.value : null )).filter( x => x != null);
         }
-        const selectedProd = await getProductById(btn.dataset.id);
-        const item = {
-            product: selectedProd,
-            quantity,
-            flavors: checkeds,
-            cart_id: new Date().getTime()
-        }
-        if (cart.addToCart( item )) { 
+        const { id, name, desc, discount_percent, price, img, flavors, max_flavors } = await getProductById(btn.dataset.id);
+        const product = new Product(quantity, checkeds, new Date().getTime(), id, name, desc, discount_percent, price, img, flavors, max_flavors);
+        if (cart.addToCart( product )) { 
             addCartModal.modal('hide');
-            mobileProductsQuantity.text(cart.products.length);
-            mobileTotalPrice.text('$ ' + cart.total_price.toFixed(2));
-            animateCSS('#mobileProductsQuantity', 'tada');
-            animateCSS('#totalPrice', 'pulse');
             $('#successToast').toast('show');
-            cartProductQuantity.text(cart.products.length)
-            animateCSS('#btnCart', 'tada');
         };
     });
     //===========================================================>>
@@ -188,8 +173,8 @@ export const setEvents = (slider, cart) => {
         if ( window.scrollY >= 400 ) {
             cartButtonResponsive.removeClass('d-none');
         } else {
-            animateCSS('#cartButtonResponsive', 'slideInUp');
-            animateCSS('#cartButtonResponsive', 'faster');
+            animateCSS(cartButtonResponsive, 'slideInUp');
+            animateCSS(cartButtonResponsive, 'faster');
             cartButtonResponsive.addClass('d-none');
         }
     }
@@ -199,9 +184,7 @@ export const setEvents = (slider, cart) => {
     btnConfirmOrder.on('click', () => {
         cartModal.modal('hide');
         cart.resetCart();
-        cartProductQuantity.text(cart.products.length);
         cartModal.find('tbody').html('');
-        tdTotalPrice.text('$ 0.00');
         Swal.fire({
             title: 'Pedido confirmado',
             icon: 'success',

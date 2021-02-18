@@ -58,9 +58,9 @@
         </li>
       </ul>
     </div>
-    <button id="btnCart" type="button" class="btn btn-outline-light d-none d-lg-inline" data-toggle="modal"
+    <button id="navbarBtnCart" type="button" style="text-decoration: none;" class="btn btn-link text-light mr-3 btn-lg d-none d-lg-inline" data-toggle="modal"
       data-target="#cartModal">
-      Carrito de productos <i class="fas fa-shopping-cart"></i> <span id="cartProductQuantity"
+      <i class="fas fa-shopping-cart"></i> <span id="navbarCounter"
         class="badge badge-primary">0</span>
     </button>
   </nav>
@@ -107,9 +107,9 @@
   <div id="cartButtonResponsive" class="cart-button-container d-none d-lg-none">
     <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#cartModal">
       <div class="row justify-content-between">
-        <div class="col-1"><span id="mobileProductsQuantity" class="badge badge-secondary">0</span></div>
+        <div class="col-1"><span id="smallScreenCounter" class="badge badge-secondary">0</span></div>
         <div class="col-6">En carrito</div>
-        <div class="col-4" id="totalPrice">$ 0.00</div>
+        <div class="col-4" id="smallTotalPrice">$ 0.00</div>
       </div>
     </button>
   </div>
@@ -221,7 +221,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
-          <button id="btnConfirmOrder" type="button" class="btn btn-primary">Confirmar pedido</button>
+          <button disabled id="btnConfirmOrder" type="button" class="btn btn-primary">Confirmar pedido</button>
         </div>
       </div>
     </div>
