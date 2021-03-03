@@ -38,30 +38,10 @@
     <a class="navbar-brand logo logo--navbar" href="index.html">
       <span class="logo__title">Perfect Ice Cream</span>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
-    <button id="navbarBtnCart" type="button" style="text-decoration: none;" class="btn btn-link text-light mr-3 btn-lg d-none d-lg-inline" data-toggle="modal"
-      data-target="#cartModal">
-      <i class="fas fa-shopping-cart"></i> <span id="navbarCounter"
-        class="badge badge-primary">0</span>
+    <div class="collapse navbar-collapse" id="navbarNav"></div>
+    <button id="navbarBtnCart" type="button" style="text-decoration: none;"
+      class="btn btn-link text-light mr-3 btn-lg d-none d-lg-inline" data-toggle="modal" data-target="#cartModal">
+      <i class="fas fa-shopping-cart"></i> <span id="navbarCounter" class="badge badge-primary">0</span>
     </button>
   </nav>
   <!-- ============================================= -->
@@ -99,7 +79,55 @@
       </div>
     </section>
 
+    <section class="home__background-popsicle">
+      <div class="container pt-3 pb-3">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-md-6 text-center text-md-start">
+            <h3 class="text-center">Tus sabores favoritos en un solo lugar</h3>
+            <img class="d-md-none w-100 mt-3 mb-3" src="./assets/images/icecream-1.jpg" alt="sabores">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus eius dolore earum ipsa magnam
+              dicta, temporibus similique veritatis inventore obcaecati at vel, animi dignissimos. Recusandae id
+              molestiae reprehenderit harum suscipit.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum neque suscipit porro. Molestias quis
+              saepe, laudantium eaque a possimus sed, excepturi culpa at modi deserunt impedit animi? Dolorem, assumenda
+              vero?</p>
+          </div>
+          <div class="col-md-6 d-none d-md-block text-center">
+            <img class="w-100" src="./assets/images/icecream-1.jpg" alt="sabores">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 d-none d-md-block text-center">
+            <img class="w-100" src="./assets/images/prod2.jpg" alt="sabores" style="max-width: 400px;">
+          </div>
+          <div class="col-md-6 text-center text-md-start">
+            <h3 class="text-center">Pedí tu kilo de helado</h3>
+            <img class="d-md-none w-100 mt-3 mb-3" src="./assets/images/prod2.jpg" alt="sabores">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quasi atque. Corporis commodi facilis voluptas id veritatis nihil vitae dolorem illo? Inventore molestias quos excepturi nemo, expedita dolorum nihil nam?</p>
+            <button type="button" class="btn btn-info btn-block text-light" data-toggle="modal" data-target="#addCartModal" data-id="3" data-max-flavors="4"> <i class="fas fa-cart-plus"></i> PEDIR AHORA</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="mb-5 mb-md-0">
+    <article>
+      <h4>Autor de esta página</h4>
+      <p>Josué Baez</p>
+    </article>
+    <article>
+      <h4>Contacto</h4>
+      <p><a class="text-light" href="mailto:josuebaez61@gmail.com"><i class="far fa-envelope"></i>
+          josuebaez61@gmail.com</a></p>
+    </article>
+    <article class="social-networks">
+      <h5>Redes sociales</h5>
+      <a target="_blank" href="https://www.linkedin.com/in/josuebaez15/"><i class="fab fa-linkedin"></i></a>
+      <a target="_blank" href="https://www.facebook.com/josueDev61"><i class="fab fa-facebook"></i></a>
+      <a target="_blank" href="https://www.instagram.com/josuebaez61"><i class="fab fa-instagram"></i></a>
+    </article>
+  </footer>
 
   <!-- ============================================= -->
   <!-- ANCHOR Cart button responsive -->
@@ -196,28 +224,33 @@
           </button>
         </div>
         <div class="modal-body">
-          <table id="listItems" class="table table-sm">
-            <thead class="thead-light">
-              <tr>
-                <th>#</th>
-                <th>Item</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Total</th>
-                <th></th>
-              </tr>
-            <tbody>
-            </tbody>
-            <tfoot>
-              <tr class="table-light">
-                <th colspan="3">
-                  </td>
-                <th>TOTAL</td>
-                <th id="tdTotalPrice">FINAL</td>
-              </tr>
-            </tfoot>
-            </thead>
-          </table>
+          <div class="table-responsive">
+            <table id="listItems" class="table table-sm d-none">
+              <thead class="thead-light">
+                <tr>
+                  <th>#</th>
+                  <th>Item</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              <tbody>
+              </tbody>
+              <tfoot>
+                <tr class="table-light">
+                  <th colspan="3"></th>
+                  <th>TOTAL</th>
+                  <th id="tdTotalPrice">FINAL</th>
+                </tr>
+              </tfoot>
+              </thead>
+            </table>
+          </div>
+          <div id="textCartEmpty" class="text-center">
+            <i class="fas fa-shopping-cart mb-2" style="font-size: 3rem;"></i>
+            <p class="font-goodtimes" style="font-size: 1.5rem;">El carrito de productos está vacío</p>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>

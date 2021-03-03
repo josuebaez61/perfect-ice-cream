@@ -1,6 +1,6 @@
 import { getProductById } from "./ajax";
 import { scrollTo } from 'jquery.scrollto';
-import { printFlavors } from "./dom";
+import { printCartList, printFlavors } from "./dom";
 import { animateCSS } from "./animate";
 import Swal from "sweetalert2";
 import { Product } from "../classes/Product";
@@ -14,8 +14,8 @@ const cartForm = $('#cartForm');
 const nav = $('nav');
 const cartModal = $('#cartModal');
 const cartButtonResponsive = $('#cartButtonResponsive');
-const tdTotalPrice = $('#tdTotalPrice');
 const btnConfirmOrder = $('#btnConfirmOrder');
+const textCartEmpty = $('#textCartEmpty');
 
 export const setEvents = (slider, cart) => {
     $('#btnDisplace').on('click', () => {
@@ -82,35 +82,27 @@ export const setEvents = (slider, cart) => {
     cartModal.on('show.bs.modal', (e) => {
         if ( cart.products.length > 0 ) {
             btnConfirmOrder.attr('disabled', false);
+            $('#listItems').removeClass('d-none');
+            textCartEmpty.addClass('d-none');
             const tbody = cartModal.find('tbody');
             tbody.html('');
-            const template = document.querySelector('#trCartTemplate').content;
-            const fragment = document.createDocumentFragment();
-            let totalPrice = 0;
-            cart.products.forEach((product, index) => {
-                const tdArray = template.querySelectorAll('td');
-                const discount_price = (product.price / product.discount_percent);
-                tdArray[0].textContent = index + 1;
-                tdArray[1].textContent = product.name;
-                tdArray[2].textContent = product.quantity;
-                tdArray[3].textContent = discount_price.toFixed(2);
-                tdArray[4].textContent = (discount_price * product.quantity).toFixed(2);
-                template.querySelector('.btn-secondary').dataset.cartId = product.cart_id;
-                totalPrice += discount_price * product.quantity;
-                const clone = template.cloneNode(true);
-                fragment.appendChild(clone);
-            });
-            tbody.prepend(fragment);
-            tdTotalPrice.text('$ ' + totalPrice.toFixed(2));
+            printCartList( cart, tbody );
             const btnRemove = cartModal.find('#listItems .btn-secondary');
-            btnRemove.each((i, btn) => {
+            btnRemove.each((i, btn) => { // Se establece un eventListener a cada boton generado en la tabla para remover un producto del carrito...
                 $(btn).on('click', e => {
                     const cartId = $(btn).data('cart-id');
                     if ( cart.removeProduct(cartId) ) {
                         $(btn).parents('tr').remove();
+                        if (!cart.products.length > 0) {
+                            textCartEmpty.removeClass('d-none');
+                            $('#listItems').addClass('d-none');
+                        }
                     }
                 })
             });
+        } else {
+            $('#listItems').addClass('d-none');
+            textCartEmpty.removeClass('d-none');
         }
     });
     //===========================================================>>
@@ -181,6 +173,9 @@ export const setEvents = (slider, cart) => {
     //===========================================================>>
     // !SECTION Eventos de window
     //===========================================================>>
+    //===========================================================>>
+    // SECTION Confirmacion de la orden
+    //===========================================================>>
     btnConfirmOrder.on('click', () => {
         cartModal.modal('hide');
         cart.resetCart();
@@ -188,6 +183,11 @@ export const setEvents = (slider, cart) => {
         Swal.fire({
             title: 'Pedido confirmado',
             icon: 'success',
+            confirmButtonColor: '#f25e86'
+            
         });
     });
+    //===========================================================>>
+    // !SECTION Confirmacion de la orden
+    //===========================================================>>
 }

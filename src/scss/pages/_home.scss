@@ -20,6 +20,14 @@
   font-family: Magicpie;
 }
 
-main {
-  margin-bottom: 70px;
+.home__background-popsicle {
+  background-image: url('./assets/images/cherry.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  // height: 1000px;
+  background-size:cover;
+  img {
+    border: 5px solid white;
+    max-width: 500px;
+  }
 }

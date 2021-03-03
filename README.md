@@ -1,10 +1,10 @@
-# webpack-init-project
+# PERFECT ICE CREAM
 
-Este es el proyecto inicial para crear aplicaciones que utilizan webpack.
+Proyecto final para el curso de Javascript de Coderhouse.
 
-# Recuerden construir nuestro node_modules and dist
+## Visualizar el proyecto
 
-```npm install```
+Ejectuar ```npm install``` en la raiz del proyecto para instalar los modulos de node. Y luego ejecutar ``` npm start ``` para visuarlizar el proyecto en un servidor local, por defecto se iniciara en localhost:8080
 
 Y para construir el dist...
 

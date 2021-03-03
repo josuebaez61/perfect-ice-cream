@@ -1,5 +1,6 @@
 import { getFlavors, getProducts } from "./ajax";
 
+
 export const printProducts = async (splide) => {
     const sliderLi = document.getElementById('splide__list');
     const template = document.getElementById('liTemplate').content;
@@ -39,4 +40,27 @@ export const printFlavors = async () => {
     }
     flavorList.appendChild(fragment);
     return true;
+}
+
+export const printCartList = ( cart, tbody ) => {
+    const tdTotalPrice = $('#tdTotalPrice');
+    let totalPrice = 0;
+    const template = document.querySelector('#trCartTemplate').content;
+    const fragment = document.createDocumentFragment();
+    cart.products.forEach((product, index) => {
+        const tdArray = template.querySelectorAll('td');
+        const discount_price = (product.price / product.discount_percent);
+        tdArray[0].textContent = index + 1;
+        tdArray[1].textContent = product.name;
+        tdArray[2].textContent = product.quantity;
+        tdArray[3].textContent = discount_price.toFixed(2);
+        tdArray[4].textContent = (discount_price * product.quantity).toFixed(2);
+        template.querySelector('.btn-secondary').dataset.cartId = product.cart_id;
+        totalPrice += discount_price * product.quantity;
+        const clone = template.cloneNode(true);
+        fragment.appendChild(clone);
+    });
+    tbody.prepend(fragment);
+    tdTotalPrice.text('$' + totalPrice.toFixed(2));
+    return totalPrice;
 }
