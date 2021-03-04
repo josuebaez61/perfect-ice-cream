@@ -79,38 +79,54 @@
       </div>
     </section>
 
-    <section class="home__background-popsicle">
-      <div class="container pt-3 pb-3">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-6 text-center text-md-start">
-            <h3 class="text-center">Tus sabores favoritos en un solo lugar</h3>
-            <img class="d-md-none w-100 mt-3 mb-3" src="./assets/images/icecream-1.jpg" alt="sabores">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus eius dolore earum ipsa magnam
-              dicta, temporibus similique veritatis inventore obcaecati at vel, animi dignissimos. Recusandae id
-              molestiae reprehenderit harum suscipit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum neque suscipit porro. Molestias quis
-              saepe, laudantium eaque a possimus sed, excepturi culpa at modi deserunt impedit animi? Dolorem, assumenda
-              vero?</p>
-          </div>
-          <div class="col-md-6 d-none d-md-block text-center">
-            <img class="w-100" src="./assets/images/icecream-1.jpg" alt="sabores">
-          </div>
+    <section class="container-fluid">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3 d-none d-md-block text-center">
+          <img class="w-100" src="./assets/images/prod2.jpg" alt="sabores" style="max-width: 400px;">
         </div>
-        <div class="row">
-          <div class="col-md-6 d-none d-md-block text-center">
-            <img class="w-100" src="./assets/images/prod2.jpg" alt="sabores" style="max-width: 400px;">
-          </div>
-          <div class="col-md-6 text-center text-md-start">
-            <h3 class="text-center">Pedí tu kilo de helado</h3>
-            <img class="d-md-none w-100 mt-3 mb-3" src="./assets/images/prod2.jpg" alt="sabores">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quasi atque. Corporis commodi facilis voluptas id veritatis nihil vitae dolorem illo? Inventore molestias quos excepturi nemo, expedita dolorum nihil nam?</p>
-            <button type="button" class="btn btn-info btn-block text-light" data-toggle="modal" data-target="#addCartModal" data-id="3" data-max-flavors="4"> <i class="fas fa-cart-plus"></i> PEDIR AHORA</button>
-          </div>
+        <div class="col-md-6 text-center text-md-start">
+          <h3 class="text-center">Pedí tu kilo de helado</h3>
+          <img class="d-md-none w-100 mt-3 mb-3" src="./assets/images/prod2.jpg" alt="sabores">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quasi atque. Corporis commodi facilis voluptas
+            id veritatis nihil vitae dolorem illo? Inventore molestias quos excepturi nemo, expedita dolorum nihil nam?
+          </p>
+          <button type="button" class="btn btn-info text-light" data-toggle="modal"
+            data-target="#addCartModal" data-id="3" data-max-flavors="4"> <i class="fas fa-cart-plus"></i> PEDIR
+            AHORA</button>
         </div>
+      </div>
+    </section>
+
+    <section class="home__contact-form-section">
+      <div class="container">
+        <h4 class="text-center">Contactanos</h4>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="email">Tu email</label>
+            <input class="form-control" type="email" name="email" id="emailInput" placeholder="Dejanos tu e-mail..." autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z0-9]{2,4}$">
+            <div id="emailValidationFeedback" class="invalid-feedback" style="font-weight: 700; text-shadow: 1px 1px 1px white; font-size: 1rem;">
+              Debés ingresar un correo electronico válido, por ejemplo: tucorreo@email.com
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensaje</label>
+            <div class="position-relative">
+              <textarea minlength="1" maxlength="500" autocomplete="off" class="form-control" name="message" id="messageTextarea" cols="30" rows="10" placeholder="Escribí tu consulta..."></textarea>
+                <div id="textareaValidationFeedback" class="invalid-feedback" style="font-weight: 700; text-shadow: 1px 1px 1px white; font-size: 1rem;">
+                  El mensaje no puede estar vacío
+                </div>
+                <span id="messageLengthCounter">0/500</span>
+            </div>
+          </div>
+          <input class="btn btn-info text-light" type="submit" value="Enviar">
+        </form>
       </div>
     </section>
   </main>
 
+  <!-- ============================================= -->
+  <!-- SECTION Footer -->
+  <!-- ============================================= -->
   <footer class="mb-5 mb-md-0">
     <article>
       <h4>Autor de esta página</h4>
@@ -128,6 +144,9 @@
       <a target="_blank" href="https://www.instagram.com/josuebaez61"><i class="fab fa-instagram"></i></a>
     </article>
   </footer>
+  <!-- ============================================= -->
+  <!-- !SECTION Footer -->
+  <!-- ============================================= -->
 
   <!-- ============================================= -->
   <!-- ANCHOR Cart button responsive -->

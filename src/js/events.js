@@ -4,6 +4,7 @@ import { printCartList, printFlavors } from "./dom";
 import { animateCSS } from "./animate";
 import Swal from "sweetalert2";
 import { Product } from "../classes/Product";
+import { IsEmail } from "./helpers/isEmail";
 
 const addCartModal = $('#addCartModal');
 const quantityInput = $('#quantityInput');
@@ -16,6 +17,10 @@ const cartModal = $('#cartModal');
 const cartButtonResponsive = $('#cartButtonResponsive');
 const btnConfirmOrder = $('#btnConfirmOrder');
 const textCartEmpty = $('#textCartEmpty');
+const contactForm = $('#contactForm');
+const messageLengthCounter = $('#messageLengthCounter');
+const textareaContactForm = $('textarea', contactForm);
+const emailContactForm = $('input[type=email]', contactForm);
 
 export const setEvents = (slider, cart) => {
     $('#btnDisplace').on('click', () => {
@@ -40,7 +45,7 @@ export const setEvents = (slider, cart) => {
         prod.flavors ? (await printFlavors(), flavorBox.removeClass('d-none')) : flavorBox.addClass('d-none');
         if ( prod.flavors ) {
             btnConfirm.attr('disabled', true);
-            const checkboxesFlavors = $('input[type=checkbox]', cartForm);
+            const flavorsCheckboxes = $('input[type=checkbox]', cartForm);
             const flavorListsButtons = $('#flavorList button');
             flavorListsButtons.on('click', (e) => {
                 const checkbox = $('input', e.delegateTarget);
@@ -53,12 +58,12 @@ export const setEvents = (slider, cart) => {
                 }
     
                 if (checkedQuantity === maxFlavors) {
-                    checkboxesFlavors.each( (i,input) => {
+                    flavorsCheckboxes.each( (i,input) => {
                         (!$(input).is(':checked')) && $(input).attr('disabled',true);
                         (!$(input).is(':checked')) && $(input).parents('button').attr('disabled',true);
                     });
                 } else {
-                    checkboxesFlavors.attr('disabled', false);
+                    flavorsCheckboxes.attr('disabled', false);
                     flavorListsButtons.attr('disabled', false);
                 }
 
@@ -68,6 +73,8 @@ export const setEvents = (slider, cart) => {
                     btnConfirm.attr('disabled', false);
                 }
             });
+        } else {
+            btnConfirm.attr('disabled', false);
         }
     });
     addCartModal.on('hidden.bs.modal', () => {
@@ -155,7 +162,7 @@ export const setEvents = (slider, cart) => {
     window.onresize = () => {
         slider.refresh();
     }
-    window.onscroll = (e) => {
+    window.onscroll = () => {
         if ( window.scrollY === 0 && window.outerWidth > 768) {
             nav.css('background-color', 'transparent');
         } else {
@@ -184,10 +191,64 @@ export const setEvents = (slider, cart) => {
             title: 'Pedido confirmado',
             icon: 'success',
             confirmButtonColor: '#f25e86'
-            
         });
     });
     //===========================================================>>
     // !SECTION Confirmacion de la orden
     //===========================================================>>
+    textareaContactForm.on('keydown', () => {
+        messageLengthCounter.text(`${ textareaContactForm.val().length}/${textareaContactForm.attr('maxlength')}`)
+    });
+    textareaContactForm.on('keyup', () => {
+        if (textareaContactForm.val().length > 0) {
+            textareaContactForm.removeClass('is-invalid');
+            textareaContactForm.addClass('is-valid');
+        } else {
+            textareaContactForm.removeClass('is-valid');
+            textareaContactForm.addClass('is-invalid');
+        }
+        messageLengthCounter.text(`${ textareaContactForm.val().length}/${textareaContactForm.attr('maxlength')}`)
+    });
+
+    emailContactForm.on('keyup', () => {
+        if (emailContactForm.val().length > 0 && IsEmail(emailContactForm.val()) ) {
+            emailContactForm.removeClass('is-invalid');
+            emailContactForm.addClass('is-valid');
+        } else {
+            emailContactForm.removeClass('is-valid');
+            emailContactForm.addClass('is-invalid');
+        }
+    });
+
+    contactForm.on('submit', (e) => {
+        e.preventDefault();
+        const emailInput = e.target.email;
+        const messageText = e.target.message;
+        if ( (emailInput.value.length <= 0 || !IsEmail(emailInput.value)) || messageText.value.length <= 0 ) {
+            (emailInput.value.length <= 0 || !IsEmail(emailInput.value) ) && $(emailInput).addClass('is-invalid');
+            messageText.value.length <= 0 && $(messageText).addClass('is-invalid');
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                html: 'Asegurese de completar <strong>correctamente</strong> todos los campos del formulario',
+                confirmButtonColor: '#f25e86'
+            })
+        } else {
+            $(emailInput).removeClass('is-invalid');
+            $(messageText).removeClass('is-invalid');
+            Swal.fire({
+                icon: 'success',
+                title: 'Mensaje enviado',
+                confirmButtonColor: '#f25e86'
+            }).then( () => {
+                $('input[type=email]', contactForm).val('');
+                textareaContactForm.val('');
+                messageLengthCounter.text(`${ textareaContactForm.val().length}/${textareaContactForm.attr('maxlength')}`)
+                $(emailInput).removeClass('is-valid');
+                $(messageText).removeClass('is-valid');
+                $(emailInput).removeClass('is-invalid');
+                $(messageText).removeClass('is-invalid');
+            });
+        }
+    });
 }
