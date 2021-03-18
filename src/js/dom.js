@@ -50,11 +50,12 @@ export const printCartList = ( cart, tbody ) => {
     cart.products.forEach((product, index) => {
         const tdArray = template.querySelectorAll('td');
         const discount_price = (product.price / product.discount_percent);
-        tdArray[0].textContent = index + 1;
-        tdArray[1].textContent = product.name;
-        tdArray[2].textContent = product.quantity;
-        tdArray[3].textContent = discount_price.toFixed(2);
-        tdArray[4].textContent = (discount_price * product.quantity).toFixed(2);
+        tdArray[0].textContent = product.name;
+        tdArray[1].textContent = product.quantity;
+        tdArray[2].textContent = discount_price.toFixed(2);
+        tdArray[2].classList.add('text-center');
+        tdArray[3].textContent = (discount_price * product.quantity).toFixed(2);
+        tdArray[3].classList.add('text-center');
         template.querySelector('.btn-secondary').dataset.cartId = product.cart_id;
         totalPrice += discount_price * product.quantity;
         const clone = template.cloneNode(true);

@@ -248,10 +248,9 @@
         </div>
         <div class="modal-body">
           <div class="table-responsive">
-            <table id="listItems" class="table table-sm d-none">
+            <table id="listItems" class="table table-responsive-sm table-sm d-none">
               <thead class="thead-light">
                 <tr>
-                  <th>#</th>
                   <th>Item</th>
                   <th>Cantidad</th>
                   <th>Precio</th>
@@ -262,9 +261,9 @@
               </tbody>
               <tfoot>
                 <tr class="table-light">
-                  <th colspan="3"></th>
-                  <th>TOTAL</th>
-                  <th id="tdTotalPrice">FINAL</th>
+                  <th colspan="2"></th>
+                  <th class="text-center">TOTAL</th>
+                  <th class="text-center" id="tdTotalPrice">FINAL</th>
                 </tr>
               </tfoot>
               </thead>
@@ -291,7 +290,6 @@
   <!-- ============================================= -->
   <template id="trCartTemplate">
     <tr>
-      <td>1</td>
       <td>Torta Helada</td>
       <td>
         <div class="input-group mt-2">

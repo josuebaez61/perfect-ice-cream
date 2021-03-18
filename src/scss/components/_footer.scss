@@ -1,3 +1,5 @@
+@import '../utilities/mixins';
+
 footer {
     text-align: center;
     height: 280px;
@@ -6,4 +8,8 @@ footer {
     border-top: 3px solid $pink;
     color: white;
     padding: 10px;
+    margin-bottom: 50px;
+    @include bootstrapmedia(md) {
+        margin-bottom: 0px;
+    }
 }
