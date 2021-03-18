@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     color: white;
     font-family: "Welcome Summer";
-    font-size: 4rem;
+    font-size: 3.2rem;
     text-shadow: 1px 1px 1px black;
     small {
       font-family: "KR Popsicle";
@@ -20,11 +20,19 @@
         font-size: 3rem;
       }
     }
+    @include bootstrapmedia(sm) {
+      font-size: 5rem;
+      width: 400px;
+    }
     @include bootstrapmedia(md) {
       font-size: 7rem;
       width: 600px;
     }
     @include bootstrapmedia(lg) {
+      font-size: 6rem;
+      width: 794px;
+    }
+    @include bootstrapmedia(xl) {
       font-size: 7rem;
       width: 926px;
     }

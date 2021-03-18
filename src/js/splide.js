@@ -1,11 +1,11 @@
 import Splide from '@splidejs/splide';
 
 export const setSplide = () => {
-    let splide = new Splide( '.splide', 
+    let splide = new Splide('.splide',
         {
             type: 'loop',
             perPage: 5,
-            width: '1480px',
+            width: '1426px',
             trimSpace: false,
             gap: 10,
             fixedHeight: '520px',
@@ -14,19 +14,23 @@ export const setSplide = () => {
             breakpoints: {
                 1670: {
                     perPage: 4,
-                    width: '1190px'
+                    width: '1149px'
                 },
                 1380: {
                     perPage: 3,
-                    width: '890px'
+                    width: '852px'
                 },
                 1050: {
                     perPage: 2,
-                    width: '586px'
+                    width: '570px'
                 },
                 695: {
                     perPage: 1,
-                    width: '286px'
+                    width: '272px'
+                },
+                280: {
+                    perPage: 1,
+                    width: '271px'
                 }
             }
         }
