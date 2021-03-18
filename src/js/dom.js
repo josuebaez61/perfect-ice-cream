@@ -49,10 +49,14 @@ export const printCartList = ( cart, tbody ) => {
     const fragment = document.createDocumentFragment();
     cart.products.forEach((product, index) => {
         const tdArray = template.querySelectorAll('td');
+        const inputQuantity = template.querySelector('input');
         const discount_price = (product.price / product.discount_percent);
         tdArray[0].textContent = index + 1;
         tdArray[1].textContent = product.name;
-        tdArray[2].textContent = product.quantity;
+
+        // tdArray[2].textContent = product.quantity;
+        inputQuantity.value = product.quantity;
+
         tdArray[3].textContent = discount_price.toFixed(2);
         tdArray[4].textContent = (discount_price * product.quantity).toFixed(2);
         template.querySelector('.btn-secondary').dataset.cartId = product.cart_id;
