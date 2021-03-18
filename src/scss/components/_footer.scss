@@ -9,7 +9,7 @@ footer {
     color: white;
     padding: 10px;
     margin-bottom: 50px;
-    @include bootstrapmedia(md) {
+    @include bootstrapmedia(lg) {
         margin-bottom: 0px;
     }
 }
