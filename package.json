@@ -1,14 +1,15 @@
 {
-  "name": "webpack-inicial",
+  "homepage": "https://josuebaez61.github.io/perfect-ice-cream/",
+  "name": "perfect-ice-cream",
   "version": "1.0.0",
-  "description": "Plantilla de webpack",
+  "description": "Perfect Ice Cream Page",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.production.js",
     "build:dev": "webpack --config webpack.config.js",
     "start": "webpack-dev-server --open",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:dev",
     "deploy": "gh-pages -d dist"
   },
   "author": "Josue Baez",
