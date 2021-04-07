@@ -26,4 +26,5 @@ export class Product {
         this.hasFlavors = hasFlavors;
         this.max_flavors = max_flavors;
     }
+
 }
